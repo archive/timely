@@ -50,9 +50,8 @@
 
     window.Timely.prototype.invoke = function(id, fn, target) {
 
-        if(this._tryGetItemById(id, function(){})){
-            throw "The id " + id + " is already present";
-        }
+        if(this._tryGetItemById(id, function(){})){ throw "The id " + id + " is already present"; }
+        if(typeof fn !== "function") throw "You must supply an function for the invoke";
 
         // add check for fn === function
         var item = {
@@ -63,7 +62,6 @@
             "handle" : null
         };
 
-        // add check for exsisting
         this.items.push(item);
 
         var self = this;
