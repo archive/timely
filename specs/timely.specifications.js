@@ -14,10 +14,10 @@ describe("Timely Specifications", function() {
 
         it("the function should be called when the timer expires", function() {
             runs(function() {
-                timely.invoke("123", someObject.someFunction, someObject).after(10);
+                timely.invoke("123", someObject.someFunction, someObject).after(5);
             });
 
-            waits(20);
+            waits(10);
 
             runs(function(){
                 expect(someObject.someFunction).toHaveBeenCalled();
@@ -26,10 +26,10 @@ describe("Timely Specifications", function() {
 
         it("the function should only be called once", function() {
             runs(function() {
-                timely.invoke("123", someObject.someFunction, someObject).after(10);
+                timely.invoke("123", someObject.someFunction, someObject).after(5);
             });
 
-            waits(20);
+            waits(10);
 
             runs(function(){
                 expect(someObject.someFunction.callCount).toBe(1);
@@ -38,16 +38,16 @@ describe("Timely Specifications", function() {
 
         it("it should be possible to stop the timer", function() {
             runs(function() {
-                timely.invoke("123", someObject.someFunction, someObject).after(20);
+                timely.invoke("123", someObject.someFunction, someObject).after(10);
             });
 
-            waits(10);
+            waits(5);
 
             runs(function() {
                 timely.stop("123");
             });
 
-            waits(20);
+            waits(10);
 
             runs(function() {
                 expect(someObject.someFunction).not.toHaveBeenCalled();
@@ -56,22 +56,22 @@ describe("Timely Specifications", function() {
 
         it("it should be possible to restart the timer", function() {
             runs(function() {
-                timely.invoke("123", someObject.someFunction, someObject).after(20);
+                timely.invoke("123", someObject.someFunction, someObject).after(10);
             });
 
-            waits(10);
+            waits(5);
 
             runs(function() {
                 timely.restart("123");
             });
 
-            waits(15);
+            waits(5);
 
             runs(function() {
                 expect(someObject.someFunction).not.toHaveBeenCalled();
             });
 
-            waits(30);
+            waits(15);
 
             runs(function() {
                 expect(someObject.someFunction).toHaveBeenCalled();
