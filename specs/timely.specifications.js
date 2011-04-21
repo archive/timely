@@ -82,14 +82,14 @@ describe("Timely Specifications", function() {
             });
         });
 
-        it("it should throw an error if the timer id is already exists", function() {
+        it("it should throw an error if the timer id is already taken", function() {
             timely.invoke("123", someObject.someFunction, someObject).after(10);
             expect(
                 function(){ return timely.invoke("123", someObject.someFunction, someObject).after(10); }
             ).toThrow();
         });
 
-        it("it should only be possible to add functions as invokers", function() {
+        it("it should only be possible to add functions as invoker", function() {
             expect(
                 function(){ return timely.invoke("123", someObject.someFunction(), someObject).after(10); }
             ).toThrow();
